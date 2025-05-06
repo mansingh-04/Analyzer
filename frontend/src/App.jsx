@@ -29,7 +29,7 @@ function App() {
     
     // Updated server URLs to include deployed backend
     const serverUrls = [
-      "https://your-backend-url.vercel.app/components", // REPLACE with your deployed backend URL
+      "https://analyzer-5mgah7i7l-msst9876tr-gmailcoms-projects.vercel.app/components", // Your deployed backend URL
       "http://localhost:5050/components",
       "http://127.0.0.1:5050/components", 
       "http://0.0.0.0:5050/components"
@@ -40,7 +40,11 @@ function App() {
     for (const url of serverUrls) {
       try {
         console.log(`Trying to fetch from: ${url}`);
-        const response = await fetch(url, fetchOptions);
+        // For Vercel deployments with auth, include credentials
+        const response = await fetch(url, {
+          ...fetchOptions,
+          credentials: 'include' // This will include cookies for authentication
+        });
         
         if (!response.ok) {
           let errorMsg = `Error: ${response.status} - ${response.statusText}`;
