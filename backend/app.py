@@ -286,7 +286,7 @@ def process_image_content(image_parts, source, website_score=None):
                 "data": image_data
             }
         }
-
+# env update
         category_prompt = "You are an expert web analyst. Identify the most likely category of this website screenshot (e.g. e-commerce, blog, SaaS, portfolio, etc.). Return ONLY the category name, nothing else."
         category_response = model.generate_content([category_prompt, image_part])
         category = category_response.text.strip()
