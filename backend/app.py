@@ -23,7 +23,16 @@ except Exception as e:
     print(f"Error creating scoring model: {str(e)}")
 
 app = Flask(__name__)
-CORS(app) 
+
+# Configure CORS to be more specific in production
+if os.getenv('RAILWAY_ENVIRONMENT') == 'production':
+    # Get the frontend URL from environment
+    frontend_url = os.getenv('FRONTEND_URL', '*')
+    CORS(app, resources={r"/*": {"origins": frontend_url}})
+else:
+    # In development, allow all origins
+    CORS(app)
+
 def fetch_website_content(url):
     try:
         headers = {
@@ -397,6 +406,6 @@ def train_scoring_model():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     port = int(os.getenv("PORT", 5050))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host="0.0.0.0", port=port, debug=(os.getenv('RAILWAY_ENVIRONMENT') != 'production'))

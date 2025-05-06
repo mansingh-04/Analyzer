@@ -1,0 +1,31 @@
+services:
+  # Backend API
+  - type: web
+    name: websiteanalyzer-backend
+    env: python
+    buildCommand: cd backend && pip install -r requirements.txt
+    startCommand: cd backend && gunicorn app:app
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: PORT
+        value: 5050
+      - key: RAILWAY_ENVIRONMENT
+        value: production
+
+  # Frontend React app
+  - type: web
+    name: websiteanalyzer-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/build
+    envVars:
+      - key: REACT_APP_API_URL
+        fromService:
+          name: websiteanalyzer-backend
+          type: web
+          property: url
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache 

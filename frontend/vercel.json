@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "env": {
+    "REACT_APP_API_URL": "https://backend-production-1c04.up.railway.app"
+  },
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": "build"
+} 

@@ -28,19 +28,20 @@ function App() {
     }
     
     // Updated server URLs to include deployed backend
+    const API_URL = process.env.REACT_APP_API_URL || "";
     const serverUrls = [
-      "https://your-new-backend-url.xyz/components", // Replace with your new backend URL 
+      `${API_URL}/components`,
       "http://localhost:5050/components",
       "http://127.0.0.1:5050/components", 
       "http://0.0.0.0:5050/components"
-    ];
+    ].filter(Boolean);
     
     let lastError = null;
     
     for (const url of serverUrls) {
       try {
         console.log(`Trying to fetch from: ${url}`);
-        // For Vercel deployments with auth, include credentials
+        // For deployed instances with auth, include credentials
         const response = await fetch(url, {
           ...fetchOptions,
           credentials: 'include' // This will include cookies for authentication

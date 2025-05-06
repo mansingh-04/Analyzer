@@ -1,0 +1,21 @@
+[build]
+builder = "nixpacks"
+watchPatterns = ["backend/**", "frontend/**"]
+
+[[services]]
+name = "backend"
+envs = [{ name = "GEMINI_API_KEY", dev = "true" }]
+dir = "backend"
+internal_port = 5050
+routes = [
+  { path = "/api" }
+]
+
+[[services]]
+name = "frontend"
+dir = "frontend"
+envs = [{ name = "REACT_APP_API_URL", value = "${backend.RAILWAY_PUBLIC_DOMAIN}/api" }]
+internal_port = 3000
+routes = [
+  { path = "/" }
+] 

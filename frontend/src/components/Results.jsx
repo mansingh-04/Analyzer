@@ -83,12 +83,13 @@ function Results({ data }) {
         }
       };
       
+      const API_URL = process.env.REACT_APP_API_URL || "";
       const serverUrls = [
+        `${API_URL}/train-model`,
         "http://localhost:5050/train-model",
         "http://127.0.0.1:5050/train-model", 
-        "http://0.0.0.0:5050/train-model",
-        "http://10.7.9.112:5050/train-model"
-      ];
+        "http://0.0.0.0:5050/train-model"
+      ].filter(Boolean);
       
       let response = null;
       let error = null;
