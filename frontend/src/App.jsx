@@ -29,7 +29,7 @@ function App() {
     
     // Updated server URLs to include deployed backend
     const serverUrls = [
-      "https://analyzer-5mgah7i7l-msst9876tr-gmailcoms-projects.vercel.app/components", // Your deployed backend URL
+      "https://your-new-backend-url.xyz/components", // Replace with your new backend URL 
       "http://localhost:5050/components",
       "http://127.0.0.1:5050/components", 
       "http://0.0.0.0:5050/components"
