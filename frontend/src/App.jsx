@@ -26,11 +26,13 @@ function App() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     }
+    
+    // Updated server URLs to include deployed backend
     const serverUrls = [
+      "https://your-backend-url.vercel.app/components", // REPLACE with your deployed backend URL
       "http://localhost:5050/components",
       "http://127.0.0.1:5050/components", 
-      "http://0.0.0.0:5050/components",
-      "http://10.7.9.112:5050/components"
+      "http://0.0.0.0:5050/components"
     ];
     
     let lastError = null;
